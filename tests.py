@@ -51,7 +51,8 @@ def differ(value, origin):
     """
 
     if type(value) is not type(origin):
-        raise AssertionError('Types does not match: {0}, {1}'.format(type(value), type(origin)))
+        raise AssertionError('Types does not match: {0}, {1}'.format(type(value),
+                                                                     type(origin)))
 
     if isinstance(origin, dict):
         for key, item in origin.items():
@@ -79,8 +80,6 @@ Key: {2}, item: {3}'''.format(value, origin, key, item))
         return
 
     assert value == origin, '{0} not match original: {1}.'.format(value, origin)
-
-
 
 
 def number_test():
@@ -126,7 +125,7 @@ def test_bool():
 
 def test_nil():
     """
-    >>> assert lua.decode('nil') == None
+    >>> assert lua.decode('nil') is None
     >>> assert lua.encode(None) == 'nil'
     """
     pass
@@ -148,6 +147,7 @@ def table_test():
     """
     pass
 
+
 def string_test():
     r"""
     Escape test:
@@ -157,6 +157,7 @@ def string_test():
     >>> assert lua.encode({'a': 'func("call()");'}) == '{\n\ta = "func(\\"call()\\");"\n}'
     """
     pass
+
 
 def basic_test():
     """

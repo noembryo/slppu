@@ -30,7 +30,7 @@ class SLPPU(object):
     def decode(self, text):
         if not text or not isinstance(text, basestring):
             return
-        #FIXME: only short comments removed
+        # FIXME: only short comments removed
         reg = re.compile('--.*$', re.M)
         text = reg.sub('', text, 0)
         self.text = text
@@ -59,10 +59,10 @@ class SLPPU(object):
             s += 'nil'
         elif tp in [list, tuple, dict]:
             self.depth += 1
-            if len(obj) == 0 or ( tp is not dict and len(filter(
-                    lambda x:  type(x) in (int,  float,  long)
-                    or (isinstance(x, basestring) and len(x) < 10),  obj
-                )) == len(obj) ):
+            if len(obj) == 0 or (tp is not dict and
+                                 len(filter(lambda x: type(x) in (int, float, long) or
+                                            (isinstance(x, basestring) and
+                                             len(x) < 10),  obj)) == len(obj)):
                 newline = tab = ''
             dp = tab * self.depth
             s += "%s{%s" % (tab * (self.depth - 2), newline)
@@ -138,7 +138,7 @@ class SLPPU(object):
         if self.ch and self.ch == '}':
             self.depth -= 1
             self.next_chr()
-            return o #Exit here
+            return o  # Exit here
         else:
             while self.ch:
                 self.white()
@@ -150,13 +150,15 @@ class SLPPU(object):
                     self.depth -= 1
                     self.next_chr()
                     if k is not None:
-                       o[idx] = k
-                    if not numeric_keys and len([ key for key in o if isinstance(key, (str, unicode, float,  bool,  tuple))]) == 0:
+                        o[idx] = k
+                    if not numeric_keys and len([key for key in o
+                                                 if isinstance(key, (str, unicode, float,
+                                                                     bool, tuple))]) == 0:
                         ar = []
                         for key in o:
-                           ar.insert(key, o[key])
+                            ar.insert(key, o[key])
                         o = ar
-                    return o #or here
+                    return o  # or here
                 else:
                     if self.ch == ',':
                         self.next_chr()
@@ -177,9 +179,10 @@ class SLPPU(object):
                             o[idx] = k
                         idx += 1
                         k = None
-        print ERRORS['unexp_end_table'] #Bad exit here
+        print ERRORS['unexp_end_table']  # Bad exit here
 
     words = {'true': True, 'false': False, 'nil': None}
+
     def word(self):
         s = ''
         if self.ch != '\n':
@@ -236,8 +239,7 @@ class SLPPU(object):
 
     def hex(self):
         n = ''
-        while self.ch and \
-            (self.ch in 'ABCDEFabcdef' or self.ch.isdigit()):
+        while self.ch and (self.ch in 'ABCDEFabcdef' or self.ch.isdigit()):
             n += self.ch
             self.next_chr()
         return n

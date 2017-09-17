@@ -1,7 +1,7 @@
 #### SLPPU
 SLPPU is a simple lua-python data structures parser (forked to add unicode support in encoding).
 
-Lua data check:
+Lua data check: 
 
 ```lua
 data = '{ array = { 65, 23, 5 }, dict = { string = "value", array = { 3, 6, 4}, mixed = { 43, 54.3, false, string = "value", 9 } } }'

@@ -25,7 +25,7 @@ class SLPPU(object):
         self.space = re.compile('\s', re.M)
         self.alnum = re.compile('\w', re.M)
         self.newline = '\n'
-        self.tab = '\t'
+        self.tab = '    '  # or '\t'
 
     def decode(self, text):
         if not text or not isinstance(text, basestring):
@@ -196,11 +196,11 @@ class SLPPU(object):
 
     def number(self):
         def next_digit(err):
-            n = self.ch
+            num = self.ch
             self.next_chr()
             if not self.ch or not self.ch.isdigit():
                 raise ParseError(err)
-            return n
+            return num
         n = ''
         try:
             if self.ch == '-':
@@ -225,6 +225,7 @@ class SLPPU(object):
             t, e = sys.exc_info()[:2]
             print(e)
             return 0
+        # noinspection PyBroadException
         try:
             return int(n, 0)
         except:

@@ -14,7 +14,7 @@ class ParseError(Exception):
     pass
 
 
-class SLPP(object):
+class SLPPU(object):
 
     def __init__(self):
         self.text = ''
@@ -49,10 +49,8 @@ class SLPP(object):
         tab = self.tab
         newline = self.newline
         tp = type(obj)
-        if isinstance(obj, str):
+        if tp in [str, unicode]:
             s += '"%s"' % obj.replace(r'"', r'\"')
-        if isinstance(obj, unicode):
-            s += '"%s"' % obj.encode('utf-8').replace(r'"', r'\"')
         elif tp in [int, float, long, complex]:
             s += str(obj)
         elif tp is bool:
@@ -62,7 +60,7 @@ class SLPP(object):
         elif tp in [list, tuple, dict]:
             self.depth += 1
             if len(obj) == 0 or ( tp is not dict and len(filter(
-                    lambda x:  type(x) in (int,  float,  long) \
+                    lambda x:  type(x) in (int,  float,  long)
                     or (isinstance(x, basestring) and len(x) < 10),  obj
                 )) == len(obj) ):
                 newline = tab = ''
@@ -71,10 +69,8 @@ class SLPP(object):
             if tp is dict:
                 contents = []
                 for k, v in obj.iteritems():
-                    if type(k) is int:
-                        contents.append(self.__encode(v))
-                    else:
-                        contents.append(dp + '%s = %s' % (k, self.__encode(v)))
+                    k = '[{}]'.format(k) if type(k) is int else '["{}"]'.format(k)
+                    contents.append(dp + '%s = %s' % (k, (self.__encode(v))))
                 s += (',%s' % newline).join(contents)
                 
             else:
@@ -247,6 +243,6 @@ class SLPP(object):
         return n
 
 
-slpp = SLPP()
+slppu = SLPPU()
 
-__all__ = ['slpp']
+__all__ = ['slppu']

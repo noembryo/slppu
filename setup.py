@@ -2,12 +2,13 @@
 from distutils.core import setup
 
 setup(
-    name='SLPP',
-    description='SLPP is a simple lua-python data structures parser',
+    name='SLPPU',
+    description='SLPPU is a simple lua-python data structures parser '
+                '(forked to add unicode support in encoding)',
     version='1.0',
     author='SirAnthony',
-    url='https://github.com/SirAnthony/slpp',
-    license='https://github.com/SirAnthony/slpp/blob/master/LICENSE',
+    url='https://github.com/noembryo/slppu',
+    license='https://github.com/noembryo/slppu/blob/master/LICENSE',
     keywords=['lua'],
-    py_modules=['slpp'],
+    py_modules=['slppu'],
 )

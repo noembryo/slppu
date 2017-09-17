@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from slpp import slpp as lua
+from slppu import slppu as lua
 
 """
-Tests for slpp
+Tests for slppu
 """
 
 
@@ -73,7 +73,7 @@ Key: {2}, item: {3}'''.format(value, origin, key, item))
             except IndexError:
                 raise AssertionError(
                     '{0} not match original: {1}. Item {2} not found'.format(
-                        response, origin, origin[i]))
+                        value, origin, origin[i]))
             except Exception, e:
                 raise e
         return

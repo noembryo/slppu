@@ -1,6 +1,5 @@
 import re
 import sys
-from numbers import Number as number
 
 ERRORS = {
     'unexp_end_string': u'Unexpected end of string while parsing Lua string.',
@@ -52,7 +51,7 @@ class SLPPU(object):
         tp = type(obj)
         if tp in [str, unicode]:
             s += '"%s"' % obj.replace(r'"', r'\"')
-        elif isinstance(obj, number):
+        elif tp in [int, float, long, complex]:
             s += str(obj)
         elif tp is bool:
             s += str(obj).lower()
@@ -70,7 +69,8 @@ class SLPPU(object):
             if tp is dict:
                 contents = []
                 for k, v in obj.iteritems():
-                    k = '[{}]'.format(k) if isinstance(k, number) else '["{}"]'.format(k)
+                    k = ('[{}]'.format(k) if type(k) in [int, float, long, complex]
+                         else '["{}"]'.format(k))
                     contents.append(dp + '%s = %s' % (k, (self.__encode(v))))
                 s += (',%s' % newline).join(contents)
                 

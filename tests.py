@@ -154,7 +154,7 @@ def string_test():
     >>> assert lua.decode(r"'test\'s string'") == "test's string"
 
     Add escaping on encode:
-    >>> assert lua.encode({'a': 'func("call()");'}) == '{\n\ta = "func(\\"call()\\");"\n}'
+    >>> assert lua.encode({'a': 'func("call()");'}) == '{\n\t["a"] = "func(\\"call()\\");"\n}'
     """
     pass
 
@@ -163,7 +163,7 @@ def basic_test():
     """
     No data loss:
 
-    >>> data = '{ array = { 65, 23, 5 }, dict = { string = "value", array = { 3, 6, 4}, mixed = { 43, 54.3, false, string = "value", 9 } } }'
+    >>> data = '{ ["array"] = { 65, 23, 5 }, ["dict"] = { ["string"] = "value", ["array"] = { 3, 6, 4}, ["mixed"] = { 43, 54.3, false, ["string"] = "value", 9 } } }'
     >>> d = lua.decode(data)
     >>> differ(d, lua.decode(lua.encode(d)))
     """
@@ -172,8 +172,8 @@ def basic_test():
 
 def unicode_test():
     ur"""
-    >>> assert lua.encode(u'Привет') == '"\xd0\x9f\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd1\x82"'
-    >>> assert lua.encode({'s': u'Привет'}) == '{\n\ts = "Привет"\n}'
+    >>> assert lua.encode(u'Привет') == u'"\u041f\u0440\u0438\u0432\u0435\u0442"'
+    >>> assert lua.encode({'s': u'Привет'}) == u'{\n\t["s"] = "\u041f\u0440\u0438\u0432\u0435\u0442"\n}'
     """
     pass
 

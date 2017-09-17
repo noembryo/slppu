@@ -62,7 +62,7 @@ class SLPPU(object):
             if len(obj) == 0 or (tp is not dict and
                                  len(filter(lambda x: type(x) in (int, float, long) or
                                             (isinstance(x, basestring) and
-                                             len(x) < 10),  obj)) == len(obj)):
+                                             len(x) < 10), obj)) == len(obj)):
                 newline = tab = ''
             dp = tab * self.depth
             s += "%s{%s" % (tab * (self.depth - 2), newline)
@@ -104,7 +104,7 @@ class SLPPU(object):
             return self.object()
         if self.ch == "[":
             self.next_chr()
-        if self.ch in ['"',  "'",  '[']:
+        if self.ch in ['"', "'", '[']:
             return self.string(self.ch)
         if self.ch.isdigit() or self.ch == '-':
             return self.number()
@@ -115,7 +115,7 @@ class SLPPU(object):
         start = self.ch
         if end == '[':
             end = ']'
-        if start in ['"',  "'",  '[']:
+        if start in ['"', "'", '[']:
             while self.next_chr():
                 if self.ch == end:
                     self.next_chr()

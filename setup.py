@@ -9,4 +9,4 @@ setup(name='SLPPU',
       url='https://github.com/noembryo/slppu',
       license='https://github.com/noembryo/slppu/blob/master/LICENSE',
       keywords=['lua'],
-      py_modules=['slppu'])
+      py_modules=['slppu'], requires=['future'])

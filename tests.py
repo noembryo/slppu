@@ -1,5 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from __future__ import print_function
+try:  # ___ _______ PYTHON 2/3 COMPATIBILITY ________________________
+    # noinspection PyCompatibility
+    basestring
+except NameError:  # python 3.x
+    # noinspection PyShadowingBuiltins
+    basestring = str
 
 from slppu import slppu as lua
 
@@ -75,7 +82,7 @@ Key: {2}, item: {3}'''.format(value, origin, key, item))
                 raise AssertionError(
                     '{0} not match original: {1}. Item {2} not found'.format(
                         value, origin, origin[i]))
-            except Exception, e:
+            except Exception as e:
                 raise e
         return
 
@@ -154,7 +161,7 @@ def string_test():
     >>> assert lua.decode(r"'test\'s string'") == "test's string"
 
     Add escaping on encode:
-    >>> assert lua.encode({'a': 'func("call()");'}) == '{\n\t["a"] = "func(\\"call()\\");"\n}'
+    >>> assert lua.encode({'a': 'func("call()");'}) == '{\n    ["a"] = "func(\\"call()\\");"\n}'
     """
     pass
 
@@ -173,7 +180,7 @@ def basic_test():
 def unicode_test():
     ur"""
     >>> assert lua.encode(u'Привет') == u'"\u041f\u0440\u0438\u0432\u0435\u0442"'
-    >>> assert lua.encode({'s': u'Привет'}) == u'{\n\t["s"] = "\u041f\u0440\u0438\u0432\u0435\u0442"\n}'
+    >>> assert lua.encode({'s': u'Привет'}) == u'{\n    ["s"] = "\u041f\u0440\u0438\u0432\u0435\u0442"\n}'
     """
     pass
 

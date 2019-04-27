@@ -12,6 +12,7 @@ from future.utils import iteritems
 
 # https://github.com/noembryo/slppu
 
+
 ERRORS = {'unexp_end_string': u'Unexpected end of string while parsing Lua string.',
           'unexp_end_table': u'Unexpected end of table while parsing Lua string.',
           'mfnumber_minus': u'Malformed number (no digits after initial minus).',

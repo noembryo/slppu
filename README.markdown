@@ -1,7 +1,7 @@
 #### SLPPU
 Simple lua-python parser (forked to add unicode and Python 3 support)
 
-Lua data check: 
+Lua data check:  
 
 ```lua
 data = '{ array = { 65, 23, 5 }, dict = { string = "value", array = { 3, 6, 4}, mixed = { 43, 54.3, false, string = "value", 9 } } }'

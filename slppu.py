@@ -1,6 +1,7 @@
 from __future__ import print_function
 import re
 import sys
+
 try:  # ___ _______ PYTHON 2/3 COMPATIBILITY ________________________
     # noinspection PyCompatibility
     basestring
@@ -30,8 +31,8 @@ class SLPPU(object):
         self.at = 0
         self.len = 0
         self.depth = 0
-        self.space = re.compile('\s', re.M)
-        self.alnum = re.compile('\w', re.M)
+        self.space = re.compile(r'\s', re.M)
+        self.alnum = re.compile(r'\w', re.M)
         self.newline = '\n'
         self.tab = '    '  # or '\t'
 

@@ -1,5 +1,5 @@
 #### SLPPU
-Simple lua-python parser (forked to add unicode support in encoding and Python 3 compatiblity)
+Simple lua-python parser (forked to add unicode and Python 3 support)
 
 Lua data check: 
 

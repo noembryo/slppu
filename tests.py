@@ -58,7 +58,7 @@ def differ(value, origin):
     """
 
     if type(value) is not type(origin):
-        raise AssertionError('Types does not match: {0}, {1}'.format(type(value),
+        raise AssertionError("Types does not match: {0}, {1}".format(type(value),
                                                                      type(origin)))
 
     if isinstance(origin, dict):
@@ -66,12 +66,12 @@ def differ(value, origin):
             try:
                 differ(value[key], item)
             except KeyError:
-                raise AssertionError('''{0} not match original: {1};
-Key: {2}, item: {3}'''.format(value, origin, key, item))
+                raise AssertionError("{0} not match original: {1};\nKey: {2}, item: {3}"
+                                     .format(value, origin, key, item))
         return
 
     if isinstance(origin, basestring):
-        assert value == origin, '{0} not match original: {1}.'.format(value, origin)
+        assert value == origin, "{0} not match original: {1}.".format(value, origin)
         return
 
     if is_iterator(origin):
@@ -80,13 +80,13 @@ Key: {2}, item: {3}'''.format(value, origin, key, item))
                 differ(value[i], origin[i])
             except IndexError:
                 raise AssertionError(
-                    '{0} not match original: {1}. Item {2} not found'.format(
+                    "{0} not match original: {1}. Item {2} not found".format(
                         value, origin, origin[i]))
             except Exception as e:
                 raise e
         return
 
-    assert value == origin, '{0} not match original: {1}.'.format(value, origin)
+    assert value == origin, "{0} not match original: {1}.".format(value, origin)
 
 
 def number_test():
@@ -111,9 +111,9 @@ def number_test():
         Version = 0x07c2,           \
         Manufacturer = 0x21544948    \
     }'''), {                        \
-        'ID': 0x74fa4cae,           \
-        'Version': 0x07c2,          \
-        'Manufacturer': 0x21544948  \
+        "ID": 0x74fa4cae,           \
+        "Version": 0x07c2,          \
+        "Manufacturer": 0x21544948  \
     })
     """
     pass
@@ -121,19 +121,19 @@ def number_test():
 
 def test_bool():
     """
-    >>> assert lua.decode('false') == False
-    >>> assert lua.decode('true') == True
+    >>> assert lua.decode("false") == False
+    >>> assert lua.decode("true") == True
 
-    >>> assert lua.encode(False) == 'false'
-    >>> assert lua.encode(True) == 'true'
+    >>> assert lua.encode(False) == "false"
+    >>> assert lua.encode(True) == "true"
     """
     pass
 
 
 def test_nil():
     """
-    >>> assert lua.decode('nil') is None
-    >>> assert lua.encode(None) == 'nil'
+    >>> assert lua.decode("nil") is None
+    >>> assert lua.encode(None) == "nil"
     """
     pass
 
@@ -179,8 +179,8 @@ def basic_test():
 
 def unicode_test():
     ur"""
-    >>> assert lua.encode(u'Привет') == u'"\u041f\u0440\u0438\u0432\u0435\u0442"'
-    >>> assert lua.encode({'s': u'Привет'}) == u'{\n    ["s"] = "\u041f\u0440\u0438\u0432\u0435\u0442"\n}'
+    >>> assert lua.encode(u"Привет") == u'"\u041f\u0440\u0438\u0432\u0435\u0442"'
+    >>> assert lua.encode({"s": u"Привет"}) == u'{\n    ["s"] = "\u041f\u0440\u0438\u0432\u0435\u0442"\n}'
     """
     pass
 
